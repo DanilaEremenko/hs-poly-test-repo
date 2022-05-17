@@ -78,15 +78,33 @@ myPow n pow
 
 -- является ли данное число простым?
 isPrime :: Integer -> Bool
-isPrime = notImplementedYet
+isPrime x = isPrimeAcc x 2
+    where
+        isPrimeAcc :: Integer -> Integer -> Bool
+        isPrimeAcc x acc
+            | acc == x            = True
+            | (x `mod` acc) == 0  = False
+            | otherwise           = isPrimeAcc x (acc + 1)
 
-type Point2D = (Double, Double)
 
 -- рассчитайте площадь многоугольника по формуле Гаусса
 -- многоугольник задан списком координат
+type Point2D = (Double, Double)
+
+get1dim (d1,d2) = d1
+get2dim (d1,d2) = d2
+
 shapeArea :: [Point2D] -> Double
---shapeArea points = notImplementedYet
-shapeArea = notImplementedYet
+shapeArea points =
+        let
+            d1 = map get1dim points
+            d2 = map get2dim points
+            term1 = last d1 * head d2
+            term2 = head d1 * last d2
+            arr1  = zipWith (*) (take ((length d1) - 1) d1) (drop 1 d2)
+            arr2  = zipWith (*) (drop 1 d1) (take ((length d2) - 1) d2)
+        in
+            0.5 * abs ((sum arr1) + term1 - (sum arr2) - term2)
 
 -- треугольник задан длиной трёх своих сторон.
 -- функция должна вернуть
