@@ -27,14 +27,14 @@ unit_mySin = do
     mySin pi @?=~ 0.0
     mySin (pi / 2) @?=~ 1.0
 
-prop_mySin v = mySin v `nearlyEqual` sin v
+prop_mySin v = mySin v `nearlyEqual'` sin v
 
 unit_myCos = do
     myCos 0.0 @?=~ 1.0
-    myCos pi @?=~ 1.0
+    myCos pi @?=~ (-1.0)
     myCos (pi / 2) @?=~ 0.0
 
-prop_myCos v = myCos v `nearlyEqual` cos v
+prop_myCos v = myCos v `nearlyEqual'` cos v
 
 unit_myGCD = do
     myGCD 0 1 @?= 1
