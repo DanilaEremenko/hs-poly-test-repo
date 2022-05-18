@@ -95,16 +95,15 @@ get1dim (d1,d2) = d1
 get2dim (d1,d2) = d2
 
 shapeArea :: [Point2D] -> Double
-shapeArea points =
-        let
+shapeArea points = 0.5 * abs ((sum arr1) + term1 - (sum arr2) - term2)
+        where 
             d1 = map get1dim points
             d2 = map get2dim points
             term1 = last d1 * head d2
             term2 = head d1 * last d2
             arr1  = zipWith (*) (take ((length d1) - 1) d1) (drop 1 d2)
             arr2  = zipWith (*) (drop 1 d1) (take ((length d2) - 1) d2)
-        in
-            0.5 * abs ((sum arr1) + term1 - (sum arr2) - term2)
+            
 
 -- треугольник задан длиной трёх своих сторон.
 -- функция должна вернуть
