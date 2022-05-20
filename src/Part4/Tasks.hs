@@ -21,12 +21,12 @@ listToRlist lst = foldl (\acc el -> acc :< el) REmpty lst
 -- Реализуйте все представленные ниже классы (см. тесты)
 instance (Show a) => Show (ReverseList a) where
     show lst = "[" ++ showRlist lst ++ "]"
-    where
-        showRlist lst = 
-            case lst of
-                REmpty -> ""
-                (REmpty :< last) -> show last
-                (el1 :< el2) -> showRlist el1 ++ "," ++ show el2
+        where
+            showRlist lst = 
+                case lst of
+                    REmpty -> ""
+                    (REmpty :< last) -> show last
+                    (el1 :< el2) -> showRlist el1 ++ "," ++ show el2
 
 instance (Eq a) => Eq (ReverseList a) 
     where
