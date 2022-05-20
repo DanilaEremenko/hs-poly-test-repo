@@ -33,12 +33,20 @@ instance (Eq a) => Eq (ReverseList a)
         (==) REmpty REmpty                     = True
         (==) REmpty _                          = False
         (==) _ REmpty                          = False
-        (==) (el1 :< tail1) (el2 :< tail2) = el1 == el1 && tail2 == tail2
+        (==) (head1 :< last1) (head2 :< last2) = head1 == head2 && last1 == last2
 
 instance Semigroup (ReverseList a) 
     where
-        (<>) _ _ = notImplementedYet
-instance Monoid (ReverseList a) where
+        (<>) REmpty REmpty = REmpty
+        (<>) REmpty lst = lst
+        (<>) lst REmpty = lst
+        (<>) lst1 (head2 :< last2) = lst1 <> head2 :< last2
+
+instance Monoid (ReverseList a) 
+    where
+            mempty = REmpty
+            mappend = (<>)
+            mconcat = foldl mappend mempty
 
 instance Functor ReverseList
     where
