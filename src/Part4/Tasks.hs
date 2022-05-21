@@ -50,7 +50,9 @@ instance Monoid (ReverseList a)
 
 instance Functor ReverseList
     where
-        fmap f REmpty = notImplementedYet
+        fmap f REmpty = REmpty
+        fmap f (head :< last) = fmap f head :< f last
+
 instance Applicative ReverseList
     where
         (<*>) _ _ = notImplementedYet
